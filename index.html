@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alkneter - احجز فنادقك، سياراتك وكل ما تحتاجه للسفر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Üst Bilgi Çubuğu -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="currency-selector">
+                    <select id="currency">
+                        <option value="SAR">SAR ريال سعودي</option>
+                        <option value="USD">USD دولار أمريكي</option>
+                        <option value="EUR">EUR يورو</option>
+                        <option value="TRY">TRY ليرة تركية</option>
+                        <option value="SYP" selected>SYP ليرة سورية</option>
+                    </select>
+                </div>
+                <div class="language-selector">
+                    <select id="language">
+                        <option value="ar" selected>العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn">تسجيل الدخول</a>
+                    <a href="#" class="register-btn">حساب جديد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana Navigasyon -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-icon"><i class="fas fa-hotel"></i></span>
+                        <span class="logo-text">Alkneter</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#hotels"><i class="fas fa-hotel"></i> الفنادق</a></li>
+                    <li><a href="#flights"><i class="fas fa-plane"></i> الطيران</a></li>
+                    <li><a href="#packages"><i class="fas fa-suitcase"></i> الباقات</a></li>
+                    <li><a href="#activities"><i class="fas fa-ticket-alt"></i> الأنشطة</a></li>
+                    <li><a href="#car-rental"><i class="fas fa-car"></i> تأجير السيارات</a></li>
+                    <li><a href="#airport-transfers"><i class="fas fa-taxi"></i> النقل من المطار</a></li>
+                    <li><a href="#pharmacies"><i class="fas fa-clinic-medical"></i> صيدليات</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Bölümü -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">احجز رحلتك القادمة مع Alkneter</h1>
+                <p class="hero-subtitle">أفضل العروض على الفنادق، الطيران، تأجير السيارات والمزيد</p>
+                
+                <!-- Arama Sekmeleri -->
+                <div class="search-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="hotels"><i class="fas fa-hotel"></i> فنادق</button>
+                        <button class="tab-btn" data-tab="flights"><i class="fas fa-plane"></i> طيران</button>
+                        <button class="tab-btn" data-tab="packages"><i class="fas fa-suitcase"></i> باقات</button>
+                        <button class="tab-btn" data-tab="car-rental"><i class="fas fa-car"></i> تأجير سيارات</button>
+                        <button class="tab-btn" data-tab="pharmacies"><i class="fas fa-clinic-medical"></i> صيدليات</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- Otel Arama Formu -->
+                        <div class="tab-panel active" id="hotels-tab">
+                            <form class="search-form" id="hotel-search">
+                                <div class="form-row">
+                                    <div class="form-group destination-group">
+                                        <label for="hotel-destination"><i class="fas fa-map-marker-alt"></i> الوجهة</label>
+                                        <input type="text" id="hotel-destination" placeholder="أين تريد الذهاب؟" required>
+                                        <div class="suggestions"></div>
+                                    </div>
+                                    
+                                    <div class="form-group date-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تواريخ الإقامة</label>
+                                        <div class="date-inputs">
+                                            <input type="text" class="check-in" placeholder="تاريخ الوصول" readonly>
+                                            <span class="date-separator"><i class="fas fa-arrow-left"></i></span>
+                                            <input type="text" class="check-out" placeholder="تاريخ المغادرة" readonly>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group guests-group">
+                                        <label><i class="fas fa-user-friends"></i> الضيوف والغرف</label>
+                                        <div class="guests-selector">
+                                            <input type="text" class="guests-input" value="2 بالغين, 1 غرفة" readonly>
+                                            <div class="guests-dropdown">
+                                                <div class="guests-row">
+                                                    <span>البالغين</span>
+                                                    <div class="guests-counter">
+                                                        <button type="button" class="counter-btn minus">-</button>
+                                                        <span class="count">2</span>
+                                                        <button type="button" class="counter-btn plus">+</button>
+                                                    </div>
+                                                </div>
+                                                <div class="guests-row">
+                                                    <span>الأطفال</span>
+                                                    <div class="guests-counter">
+                                                        <button type="button" class="counter-btn minus">-</button>
+                                                        <span class="count">0</span>
+                                                        <button type="button" class="counter-btn plus">+</button>
+                                                    </div>
+                                                </div>
+                                                <div class="guests-row">
+                                                    <span>الغرف</span>
+                                                    <div class="guests-counter">
+                                                        <button type="button" class="counter-btn minus">-</button>
+                                                        <span class="count">1</span>
+                                                        <button type="button" class="counter-btn plus">+</button>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="apply-guests">تطبيق</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group search-btn-group">
+                                        <button type="submit" class="search-btn">
+                                            <i class="fas fa-search"></i> بحث
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="advanced-options">
+                                    <div class="form-group">
+                                        <label for="hotel-class">الفئة</label>
+                                        <select id="hotel-class">
+                                            <option value="">جميع الفئات</option>
+                                            <option value="5">5 نجوم</option>
+                                            <option value="4">4 نجوم</option>
+                                            <option value="3">3 نجوم</option>
+                                            <option value="2">2 نجوم</option>
+                                            <option value="1">1 نجوم</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="hotel-price-range">نطاق السعر (ل.س)</label>
+                                        <select id="hotel-price-range">
+                                            <option value="">أي سعر</option>
+                                            <option value="0-50000">حتى 50,000</option>
+                                            <option value="50000-100000">50,000 - 100,000</option>
+                                            <option value="100000-150000">100,000 - 150,000</option>
+                                            <option value="150000-200000">150,000 - 200,000</option>
+                                            <option value="200000-999999999">أكثر من 200,000</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Diğer sekme formları buraya gelecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Öne Çıkan Oteller -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">فنادق مميزة في سوريا</h2>
+                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+            </div>
+            
+            <div class="featured-hotels">
+                <!-- Otel kartları JavaScript ile eklenecek -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Popüler Destinasyonlar -->
+    <section class="destinations-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">الوجهات الشعبية</h2>
+                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')">
+                        <div class="destination-overlay"></div>
+                        <div class="destination-info">
+                            <h3>دمشق</h3>
+                            <p>ابتداءً من 50,000 ل.س</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')">
+                        <div class="destination-overlay"></div>
+                        <div class="destination-info">
+                            <h3>حلب</h3>
+                            <p>ابتداءً من 45,000 ل.س</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')">
+                        <div class="destination-overlay"></div>
+                        <div class="destination-info">
+                            <h3>اللاذقية</h3>
+                            <p>ابتداءً من 60,000 ل.س</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card">
+                    <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')">
+                        <div class="destination-overlay"></div>
+                        <div class="destination-info">
+                            <h3>حمص</h3>
+                            <p>ابتداءً من 40,000 ل.س</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neden Alkneter? -->
+    <section class="why-us-section">
+        <div class="container">
+            <h2 class="section-title">لماذا Alkneter؟</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>أفضل الأسعار</h3>
+                    <p>نضمن لك أفضل الأسعار على الفنادق والطيران. إذا وجدت سعراً أقل، سنعوضك الفرق.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم على مدار الساعة</h3>
+                    <p>فريق الدعم لدينا متاح 24/7 لمساعدتك في أي استفسار أو طارئ خلال رحلتك.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>حجوزات آمنة</h3>
+                    <p>نستخدم أحدث تقنيات التشفير لحماية بياناتك ومدفوعاتك.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>خيارات متنوعة</h3>
+                    <p>آلاف الفنادق والوجهات حول العالم لتختار منها ما يناسبك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col about-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-hotel"></i> Alkneter
+                    </div>
+                    <p class="footer-about">
+                        Alkneter ي منصة رائدة في حجوزات الفنادق والطيران وتأجير السيارات في سوريا والوطن العربي. نسعى لتقديم أفضل تجربة حجز للمسافرين.
+                    </p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">عن Alkneter</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">وظائف</a></li>
+                        <li><a href="#">المدونة</a></li>
+                        <li><a href="#">علاقات المستثمرين</a></li>
+                        <li><a href="#">أخبار الشركة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">المساعدة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">إلغاء الحجز</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">شركاؤنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الفنادق</a></li>
+                        <li><a href="#">شركات الطيران</a></li>
+                        <li><a href="#">تأجير السيارات</a></li>
+                        <li><a href="#">الأنشطة</a></li>
+                        <li><a href="#">الوكالات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">تواصل معنا</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</li>
+                        <li><i class="fas fa-phone"></i> +963 11 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@alkneter.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2025 Alkneter. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-amex"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Dosyaları -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/4.0.2/moment-range.js"></script>
+    <script src="js/main.js"></script>
+ <link rel="stylesheet" href="style.css" />
+  </body>
+</html>
