@@ -3,33 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alkneter دليلك في سوريا مع</title>
+    <title>Alkneter - دليلك الشامل للسفر والسياحة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-bar select {
+            background: transparent;
+            border: 1px solid #34495e;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        
+        .auth-buttons a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        /* Header */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            color: #e74c3c;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #34495e;
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+        
+        .nav-links li a i {
+            margin-left: 5px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            width: 100%;
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        /* Search Tabs */
+        .search-tabs {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .tab-buttons {
+            display: flex;
+            background-color: #f8f9fa;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            background-color: white;
+            color: #e74c3c;
+            border-bottom: 2px solid #e74c3c;
+        }
+        
+        .tab-content {
+            padding: 20px;
+        }
+        
+        .tab-panel {
+            display: none;
+        }
+        
+        .tab-panel.active {
+            display: block;
+        }
+        
+        /* Search Forms */
+        .search-form {
+            width: 100%;
+        }
+        
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .form-group:first-child {
+            margin-left: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Featured Sections */
+        .featured-section {
+            padding: 50px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #2c3e50;
+        }
+        
+        .view-all {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .card-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .card-info {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .card-location {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+        
+        .card-features span {
+            background-color: #f8f9fa;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .card-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .view-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        /* Why Us Section */
+        .why-us-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        .main-footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .form-row {
+                flex-wrap: wrap;
+            }
+            
+            .form-group {
+                flex: 100%;
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Üst Bilgi Çubuğu -->
+    <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-content">
-                <div class="currency-selector">
+                <div>
                     <select id="currency">
-                        <option value="SAR">SAR ريال سعودي</option>
+                        <option value="SYP">SYP ليرة سورية</option>
                         <option value="USD">USD دولار أمريكي</option>
-                        <option value="EUR">EUR يورو</option>
-                        <option value="TRY">TRY ليرة تركية</option>
-                        <option value="SYP" selected>SYP ليرة سورية</option>
                     </select>
-                </div>
-                <div class="language-selector">
                     <select id="language">
                         <option value="ar" selected>العربية</option>
                         <option value="en">English</option>
                     </select>
                 </div>
-                <div class="auth-buttons">
+                <div>
                     <a href="#" class="login-btn">تسجيل الدخول</a>
                     <a href="#" class="register-btn">حساب جديد</a>
                 </div>
@@ -37,12 +448,12 @@
         </div>
     </div>
 
-    <!-- Ana Navigasyon -->
+    <!-- Header -->
     <header class="main-header">
         <div class="container">
             <nav class="main-nav">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="#">
                         <span class="logo-icon"><i class="fas fa-hotel"></i></span>
                         <span class="logo-text">Alkneter</span>
                     </a>
@@ -50,13 +461,8 @@
                 <ul class="nav-links">
                     <li><a href="#hotels"><i class="fas fa-hotel"></i> الفنادق</a></li>
                     <li><a href="#flights"><i class="fas fa-plane"></i> الطيران</a></li>
-                    <li><a href="#packages"><i class="fas fa-suitcase"></i>خدمات الاتصال </a></li>
-                    <li><a href="#activities"><i class="fas fa-bus"></i> الأنشطة</a></li>
-                    <li><a href="#car-rental"><i class="fas fa-car"></i> تأجير السيارات الحديثة</a></li>
-                    <li><a href="#airport-transfers"><i class="fas fa-taxi"></i> النقل من المطار</a></li>
-                    <li><a href="#pharmacies"><i class="fas fa-clinic-medical"></i>الصيدليات المناوبة </a></li>
-                       <li><a href="#kaaba-visit"><i class="fas fa-kaaba"></i> خدمة الحج العمرة</a></li>
-
+                    <li><a href="#car-rental"><i class="fas fa-car"></i> تأجير السيارات</a></li>
+                    <li><a href="#umrah"><i class="fas fa-kaaba"></i> الحج والعمرة</a></li>
                 </ul>
                 <div class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -65,180 +471,380 @@
         </div>
     </header>
 
-    <!-- Hero Bölümü -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title"> دليلك في سوريا مع Alkneter</h1>
-                <p class="hero-subtitle">أفضل العروض على الفنادق، الطيران، تأجير السيارات والمزيد</p>
+                <h1 class="hero-title">Alkneter دليلك الشامل للسفر</h1>
+                <p class="hero-subtitle">احجز فنادق، طيران، سيارات وحجوزات العمرة بأفضل الأسعار</p>
                 
-                <!-- Arama Sekmeleri -->
+                <!-- Search Tabs -->
                 <div class="search-tabs">
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="hotels"><i class="fas fa-hotel"></i> فنادق</button>
                         <button class="tab-btn" data-tab="flights"><i class="fas fa-plane"></i> طيران</button>
-                        <button class="tab-btn" data-tab="packages"><i class="fas fa-suitcase"></i> خدمات الاتصال</button>
-                        <button class="tab-btn" data-tab="car-rental"><i class="fas fa-car"></i>تأجير السيارات الحديثة</button>
-                        <button class="tab-btn" data-tab="pharmacies"><i class="fas fa-clinic-medical"></i>الصيدليات المناوبة</button>
-                        <button class="tab-btn" data-tab="pharmacies"><i class="fas fa-kaaba"></i>خدمة الحج العمرة </button>
+                        <button class="tab-btn" data-tab="car-rental"><i class="fas fa-car"></i> تأجير سيارات</button>
+                        <button class="tab-btn" data-tab="umrah"><i class="fas fa-kaaba"></i> العمرة</button>
                     </div>
                     
                     <div class="tab-content">
-                        <!-- Otel Arama Formu -->
+                        <!-- Hotels Tab -->
                         <div class="tab-panel active" id="hotels-tab">
                             <form class="search-form" id="hotel-search">
                                 <div class="form-row">
-                                    <div class="form-group destination-group">
+                                    <div class="form-group">
                                         <label for="hotel-destination"><i class="fas fa-map-marker-alt"></i> الوجهة</label>
-                                        <input type="text" id="hotel-destination" placeholder="أين تريد الذهاب؟" required>
-                                        <div class="suggestions"></div>
+                                        <input type="text" id="hotel-destination" placeholder="أدخل المدينة أو الفندق">
                                     </div>
                                     
-                                    <div class="form-group date-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تواريخ الإقامة</label>
-                                        <div class="date-inputs">
-                                            <input type="text" class="check-in" placeholder="تاريخ الوصول" readonly>
-                                            <span class="date-separator"><i class="fas fa-arrow-left"></i></span>
-                                            <input type="text" class="check-out" placeholder="تاريخ المغادرة" readonly>
-                                        </div>
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ الوصول</label>
+                                        <input type="date" id="check-in">
                                     </div>
                                     
-                                    <div class="form-group guests-group">
-                                        <label><i class="fas fa-user-friends"></i> الضيوف والغرف</label>
-                                        <div class="guests-selector">
-                                            <input type="text" class="guests-input" value="2 بالغين, 1 غرفة" readonly>
-                                            <div class="guests-dropdown">
-                                                <div class="guests-row">
-                                                    <span>البالغين</span>
-                                                    <div class="guests-counter">
-                                                        <button type="button" class="counter-btn minus">-</button>
-                                                        <span class="count">2</span>
-                                                        <button type="button" class="counter-btn plus">+</button>
-                                                    </div>
-                                                </div>
-                                                <div class="guests-row">
-                                                    <span>الأطفال</span>
-                                                    <div class="guests-counter">
-                                                        <button type="button" class="counter-btn minus">-</button>
-                                                        <span class="count">0</span>
-                                                        <button type="button" class="counter-btn plus">+</button>
-                                                    </div>
-                                                </div>
-                                                <div class="guests-row">
-                                                    <span>الغرف</span>
-                                                    <div class="guests-counter">
-                                                        <button type="button" class="counter-btn minus">-</button>
-                                                        <span class="count">1</span>
-                                                        <button type="button" class="counter-btn plus">+</button>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="apply-guests">تطبيق</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group search-btn-group">
-                                        <button type="submit" class="search-btn">
-                                            <i class="fas fa-search"></i> بحث
-                                        </button>
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ المغادرة</label>
+                                        <input type="date" id="check-out">
                                     </div>
                                 </div>
                                 
-                                <div class="advanced-options">
+                                <div class="form-row">
                                     <div class="form-group">
-                                        <label for="hotel-class">الفئة</label>
-                                        <select id="hotel-class">
-                                            <option value="">جميع الفئات</option>
-                                            <option value="5">5 نجوم</option>
-                                            <option value="4">4 نجوم</option>
-                                            <option value="3">3 نجوم</option>
-                                            <option value="2">2 نجوم</option>
-                                            <option value="1">1 نجوم</option>
+                                        <label><i class="fas fa-user-friends"></i> الضيوف</label>
+                                        <select id="guests">
+                                            <option>1 بالغ</option>
+                                            <option selected>2 بالغين</option>
+                                            <option>عائلة (2+2)</option>
+                                            <option>مجموعة</option>
                                         </select>
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="hotel-price-range">نطاق السعر (ل.س)</label>
-                                        <select id="hotel-price-range">
-                                            <option value="">أي سعر</option>
-                                            <option value="0-50000">حتى 50,000</option>
-                                            <option value="50000-100000">50,000 - 100,000</option>
-                                            <option value="100000-150000">100,000 - 150,000</option>
-                                            <option value="150000-200000">150,000 - 200,000</option>
-                                            <option value="200000-999999999">أكثر من 200,000</option>
+                                        <label><i class="fas fa-bed"></i> الغرف</label>
+                                        <select id="rooms">
+                                            <option>1 غرفة</option>
+                                            <option selected>2 غرف</option>
+                                            <option>3 غرف</option>
                                         </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         
-                        <!-- Diğer sekme formları buraya gelecek -->
+                        <!-- Flights Tab -->
+                        <div class="tab-panel" id="flights-tab">
+                            <form class="search-form" id="flight-search">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="flight-from"><i class="fas fa-plane-departure"></i> من</label>
+                                        <input type="text" id="flight-from" placeholder="المدينة أو المطار">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="flight-to"><i class="fas fa-plane-arrival"></i> إلى</label>
+                                        <input type="text" id="flight-to" placeholder="المدينة أو المطار">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ السفر</label>
+                                        <input type="date" id="flight-date">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-user-friends"></i> المسافرون</label>
+                                        <select id="passengers">
+                                            <option>1 مسافر</option>
+                                            <option selected>2 مسافرين</option>
+                                            <option>عائلة</option>
+                                            <option>مجموعة</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-chair"></i> درجة السفر</label>
+                                        <select id="flight-class">
+                                            <option>السياحية</option>
+                                            <option>رجال الأعمال</option>
+                                            <option>الأولى</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Car Rental Tab -->
+                        <div class="tab-panel" id="car-rental-tab">
+                            <form class="search-form" id="car-search">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="car-location"><i class="fas fa-map-marker-alt"></i> المكان</label>
+                                        <input type="text" id="car-location" placeholder="المدينة أو الموقع">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ الاستلام</label>
+                                        <input type="date" id="pickup-date">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ التسليم</label>
+                                        <input type="date" id="dropoff-date">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-car"></i> نوع السيارة</label>
+                                        <select id="car-type">
+                                            <option>اقتصادية</option>
+                                            <option>متوسطة</option>
+                                            <option>SUV</option>
+                                            <option>فاخرة</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Umrah Tab -->
+                        <div class="tab-panel" id="umrah-tab">
+                            <form class="search-form" id="umrah-search">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="umrah-from"><i class="fas fa-plane-departure"></i> مدينة المغادرة</label>
+                                        <input type="text" id="umrah-from" placeholder="المدينة">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-calendar-alt"></i> تاريخ السفر</label>
+                                        <input type="date" id="umrah-date">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-clock"></i> المدة</label>
+                                        <select id="umrah-duration">
+                                            <option>7 أيام</option>
+                                            <option>10 أيام</option>
+                                            <option>14 يوم</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-user-friends"></i> المسافرون</label>
+                                        <select id="umrah-passengers">
+                                            <option>1 مسافر</option>
+                                            <option selected>2 مسافرين</option>
+                                            <option>عائلة</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label><i class="fas fa-hotel"></i> فئة الفندق</label>
+                                        <select id="umrah-hotel">
+                                            <option>3 نجوم</option>
+                                            <option>4 نجوم</option>
+                                            <option>5 نجوم</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Öne Çıkan Oteller -->
-    <section class="featured-section">
+    <!-- Hotels Section -->
+    <section class="featured-section" id="hotels">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">فنادق مميزة في سوريا</h2>
-                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+                <a href="#" class="view-all">عرض الكل</a>
             </div>
             
-            <div class="featured-hotels">
-                <!-- Otel kartları JavaScript ile eklenecek -->
+            <div class="cards-grid">
+                <!-- Hotel 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://www.syria.tv/sites/default/files/styles/detailed_thumb_/public/2024-11/270097827_448893090061986_4826664044708779374_n.png?itok=9dQia8W3')">
+                        <span class="card-rating">4.5 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">فندق الشام الكبير</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-wifi"></i> واي فاي</span>
+                            <span><i class="fas fa-swimming-pool"></i> مسبح</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">50,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.rBBYbR_SUUCGfUDSq60MbgAAAA?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">4.2 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">فندق أمواج اللاذقية</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> اللاذقية، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-umbrella-beach"></i> شاطئ خاص</span>
+                            <span><i class="fas fa-utensils"></i> مطعم</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">65,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 3 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.agbkBSoIdhw5PxHaIte_kgHaEK?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">4.7 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">فندق قصر حلب</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حلب، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-spa"></i> سبا</span>
+                            <span><i class="fas fa-dumbbell"></i> جيم</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">75,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 4 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.1J4buVB6IWpqSMDxHRMNtwHaE8?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">4.0 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">فندق بوسيدون</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> طرطوس، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-umbrella-beach"></i> شاطئ خاص</span>
+                            <span><i class="fas fa-cocktail"></i> بار</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">55,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Popüler Destinasyonlar -->
-    <section class="destinations-section">
+    <!-- Flights Section -->
+    <section class="featured-section" id="flights">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">الوجهات الشعبية</h2>
-                <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+                <h2 class="section-title">رحلات جوية مميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
             </div>
             
-            <div class="destinations-grid">
-                <div class="destination-card">
-                    <div class="destination-image" style="background-image: url('https://content.time.com/time/2012/influentialplaces/damascus.jpg')">
-                        <div class="destination-overlay"></div>
-                        <div class="destination-info">
-                            <h3>دمشق</h3>
-                            <p>ابتداءً من 50,000 ل.س</p>
+            <div class="cards-grid">
+                <!-- Flight 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Tupolev_Tu-134B_Syrian_Airlines.JPG/300px-Tupolev_Tu-134B_Syrian_Airlines.JPG')">
+                        <span class="card-rating"><i class="fas fa-plane"></i> سيريان إير</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">دمشق → دبي</h3>
+                        <p class="card-location"><i class="far fa-clock"></i> 3 ساعات 10 دقائق</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-suitcase"></i> أمتعة 23kg</span>
+                            <span><i class="fas fa-utensils"></i> وجبة</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">350,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="destination-card">
-                    <div class="destination-image" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP._7VdgHlhVqtcJvpJMnyCnwHaEK?rs=1&pid=ImgDetMain')">
-                        <div class="destination-overlay"></div>
-                        <div class="destination-info">
-                            <h3>حلب</h3>
-                            <p>ابتداءً من 45,000 ل.س</p>
+                <!-- Flight 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.RzdGk7umvEF58t_VyNgVpgHaE7?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating"><i class="fas fa-plane"></i> طيران الخليج</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">دمشق → الدوحة</h3>
+                        <p class="card-location"><i class="far fa-clock"></i> 2 ساعات 30 دقائق</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-suitcase"></i> أمتعة 30kg</span>
+                            <span><i class="fas fa-utensils"></i> وجبة</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">420,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="destination-card">
-                    <div class="destination-image" style="background-image: url('https://th.bing.com/th/id/R.06782093a19d27f830d3a747cbcc567c?rik=99rKbpBxorMeAQ&pid=ImgRaw&r=0')">
-                        <div class="destination-overlay"></div>
-                        <div class="destination-info">
-                            <h3>اللاذقية</h3>
-                            <p>ابتداءً من 60,000 ل.س</p>
+                <!-- Flight 3 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://th.bing.com/th/id/R.9a9588b73ff587d03b0a8342530f24c7?rik=MpKT5rG6Fq91mw&riu=http%3a%2f%2ftaylorwimpeyspain.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2fturkish-airlines.jpg&ehk=RcVEGZKoY30ntDzn67WoCJe2jUljP1rOwEykme%2bBDnc%3d&risl=&pid=ImgRaw&r=0')">
+                        <span class="card-rating"><i class="fas fa-plane"></i> الطيران التركي</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">حلب → اسطنبول</h3>
+                        <p class="card-location"><i class="far fa-clock"></i> 1 ساعة 50 دقيقة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-suitcase"></i> أمتعة 20kg</span>
+                            <span><i class="fas fa-utensils"></i> وجبة خفيفة</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">280,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="destination-card">
-                    <div class="destination-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.DNsmyiUAWw_LHXExralHAQHaFH?rs=1&pid=ImgDetMain')">
-                        <div class="destination-overlay"></div>
-                        <div class="destination-info">
-                            <h3>حمص</h3>
-                            <p>ابتداءً من 40,000 ل.س</p>
+                <!-- Flight 4 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://th.bing.com/th/id/R.82a45c0249621418687e0f5367e3ebab?rik=bak91OtOD9l%2fEw&pid=ImgRaw&r=0')">
+                        <span class="card-rating"><i class="fas fa-plane"></i> مصر للطيران</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">دمشق → القاهرة</h3>
+                        <p class="card-location"><i class="far fa-clock"></i> 1 ساعة 30 دقيقة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-suitcase"></i> أمتعة 23kg</span>
+                            <span><i class="fas fa-utensils"></i> وجبة</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">250,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
                         </div>
                     </div>
                 </div>
@@ -246,10 +852,185 @@
         </div>
     </section>
 
-    <!-- Neden Alkneter? -->
+    <!-- Car Rental Section -->
+    <section class="featured-section" id="car-rental">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">سيارات للتأجير</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            
+            <div class="cards-grid">
+                <!-- Car 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.kY9udpeqzgVlP1SC-boKuAHaEP?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating"><i class="fas fa-car"></i> اقتصادية</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">تويوتا ياريس 2023</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
+                            <span><i class="fas fa-cog"></i> أوتوماتيك</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">75,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.D6gMlFU4MoxLrzKrRlzW7AHaEo?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating"><i class="fas fa-car"></i> SUV</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">هيونداي توسان 2022</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حلب، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
+                            <span><i class="fas fa-user-friends"></i> 7 مقاعد</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">120,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car 3 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.RJvgA1q2vJkBc5hAxpoPiQHaEV?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating"><i class="fas fa-car"></i> فاخرة</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">مرسيدس E200 2021</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> اللاذقية، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
+                            <span><i class="fas fa-bolt"></i> كاملة المواصفات</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">200,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car 4 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP._u_htXgmJ17msZlPMJ3yTQHaEo?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating"><i class="fas fa-car"></i> عائلية</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">كيا كارينز 2022</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حمص، سوريا</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
+                            <span><i class="fas fa-user-friends"></i> 7 مقاعد</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">100,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Umrah Section -->
+    <section class="featured-section" id="umrah">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">عروض العمرة المميزة</h2>
+                <a href="#" class="view-all">عرض الكل</a>
+            </div>
+            
+            <div class="cards-grid">
+                <!-- Umrah 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.X_Rl0TWvWuZ-7v9qWGAiCQHaEK?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">عمرة مميزة</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">عمرة رمضان 2025</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-hotel"></i> فندق 4 نجوم</span>
+                            <span><i class="fas fa-utensils"></i> إفطار وسحور</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">2,500,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Umrah 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.cGI7y-9RF2DkTy3mIZfmAwHaEO?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">عمرة اقتصادية</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">عمرة شعبان 2025</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من حلب إلى مكة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-hotel"></i> فندق 3 نجوم</span>
+                            <span><i class="fas fa-bus"></i> مواصلات مشتركة</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">1,800,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hajj -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.AfNFNcxXoLdTHa7RRUudRAHaE8?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">حج 2025</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">حج القرعة 2025</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-hotel"></i> فندق 5 نجوم</span>
+                            <span><i class="fas fa-user-tie"></i> مرشد حج</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">5,000,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Umrah Family -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP._Hb3S8JH1V4mv78qrc9vAQHaE8?rs=1&pid=ImgDetMain')">
+                        <span class="card-rating">عمرة عائلية</span>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">عمرة العائلة 2025</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-hotel"></i> شقق فندقية</span>
+                            <span><i class="fas fa-child"></i> أنشطة للأطفال</span>
+                        </div>
+                        <div class="card-price">
+                            <span class="price">3,200,000 ل.س</span>
+                            <a href="#" class="view-btn">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
+    <!-- Why Us Section -->
     <section class="why-us-section">
         <div class="container">
-            <h2 class="section-title">لماذا Alkneter؟</h2>
+            <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">لماذا تختار Alkneter؟</h2>
             
             <div class="features-grid">
                 <div class="feature-card">
@@ -257,15 +1038,15 @@
                         <i class="fas fa-percentage"></i>
                     </div>
                     <h3>أفضل الأسعار</h3>
-                    <p>عروض طوال فترة السنة واسعار مخفضة الزوار الدائمين</p>
+                    <p>نضمن لك أفضل الأسعار مع عروض حصرية وخصومات تصل إلى 50%</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3>دعم على مدار الساعة</h3>
-                    <p>فريق الدعم لدينا متاح 24/7 لمساعدتك في أي استفسار أو طارئ خلال رحلتك.</p>
+                    <h3>دعم فني 24/7</h3>
+                    <p>فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار</p>
                 </div>
                 
                 <div class="feature-card">
@@ -273,7 +1054,7 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>حجوزات آمنة</h3>
-                    <p>نستخدم أحدث تقنيات التشفير لحماية بياناتك ومدفوعاتك.</p>
+                    <p>نستخدم أحدث أنظمة التشفير لحماية بياناتك ومدفوعاتك</p>
                 </div>
                 
                 <div class="feature-card">
@@ -281,7 +1062,7 @@
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <h3>خيارات متنوعة</h3>
-                    <p>آلاف الفنادق والوجهات حول العالم لتختار منها ما يناسبك.</p>
+                    <p>آلاف الفنادق والوجهات حول العالم لتختار منها ما يناسبك</p>
                 </div>
             </div>
         </div>
@@ -291,86 +1072,114 @@
     <footer class="main-footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col about-col">
+                <div>
                     <div class="footer-logo">
                         <i class="fas fa-hotel"></i> Alkneter
                     </div>
-                    <p class="footer-about">
-                        Alkneter ي منصة رائدة في حجوزات الفنادق والطيران وتأجير السيارات في سوريا والوطن العربي. نسعى لتقديم أفضل تجربة حجز للمسافرين.
+                    <p style="margin: 15px 0; color: #bdc3c7;">
+                        منصة رائدة في حجوزات الفنادق والطيران وتأجير السيارات في سوريا والوطن العربي.
                     </p>
-                    
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-col">
-                    <h3 class="footer-title">عن Alkneter</h3>
+                <div>
+                    <h3 style="margin-bottom: 15px;">روابط سريعة</h3>
                     <ul class="footer-links">
-                        <li><a href="#">من نحن</a></li>
-                        <li><a href="#">وظائف</a></li>
-                        <li><a href="#">المدونة</a></li>
-                        <li><a href="#">علاقات المستثمرين</a></li>
-                        <li><a href="#">أخبار الشركة</a></li>
+                        <li><a href="#">الصفحة الرئيسية</a></li>
+                        <li><a href="#">الفنادق</a></li>
+                        <li><a href="#">الطيران</a></li>
+                        <li><a href="#">تأجير السيارات</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h3 class="footer-title">المساعدة</h3>
+                <div>
+                    <h3 style="margin-bottom: 15px;">المساعدة</h3>
                     <ul class="footer-links">
-                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
                         <li><a href="#">شروط الاستخدام</a></li>
                         <li><a href="#">سياسة الخصوصية</a></li>
-                        <li><a href="#">إلغاء الحجز</a></li>
-                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h3 class="footer-title">شركاؤنا</h3>
+                <div>
+                    <h3 style="margin-bottom: 15px;">اتصل بنا</h3>
                     <ul class="footer-links">
-                        <li><a href="#">الفنادق</a></li>
-                        <li><a href="#">شركات الطيران</a></li>
-                        <li><a href="#">تأجير السيارات</a></li>
-                        <li><a href="#">الأنشطة</a></li>
-                        <li><a href="#">الوكالات</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3 class="footer-title">تواصل معنا</h3>
-                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +90 537 237 32 77</li>
+                        <li><i class="fas fa-phone"></i> +966 59 861 1010 </li>
+                        <li><i class="fas fa-envelope"></i> alkneter@gmail.com</li>
                         <li><i class="fas fa-map-marker-alt"></i> زورونا في سوريا بفرعنا الجديد </li>
-                        <li><i class="fas fa-phone"></i> +966 59 861 1010 - +90 537 237 32 77</li>
-                        <li><i class="fas fa-envelope"></i> info@alkneter.com</li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <div class="copyright">
-                    &copy; 2025 Alkneter. جميع الحقوق محفوظة.
-                </div>
-                
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                    <i class="fab fa-cc-amex"></i>
-                </div>
+                <p>&copy; 2025 Alkneter. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Dosyaları -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-range/4.0.2/moment-range.js"></script>
-    <script src="js/main.js"></script>
- <link rel="stylesheet" href="style.css" />
-  </body>
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Switching
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Hide all tab panels
+                    document.querySelectorAll('.tab-panel').forEach(panel => {
+                        panel.classList.remove('active');
+                    });
+                    
+                    // Show the selected panel
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Form Submission
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('تم إرسال طلب البحث بنجاح! سيتم عرض النتائج الآن.');
+                    // In a real app, you would process the form and show results
+                });
+            });
+            
+            // Update date inputs to show Arabic placeholder
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.type = 'date';
+                });
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.type = 'text';
+                        this.placeholder = 'اختر التاريخ';
+                    }
+                });
+            });
+        });
+    </script>
+<link rel="stylesheet" href="style.css" />
+</body>
 </html>
