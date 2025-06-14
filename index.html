@@ -3,381 +3,671 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alkneter - دليلك الشامل للسفر والسياحة</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Arko Pro | خدمات السفر والسياحة في سوريا</title>
     <style>
         /* CSS Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
         }
         
+        /* Base Styles */
         body {
-            background-color: #f5f5f5;
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            line-height: 1.8;
             color: #333;
-            line-height: 1.6;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
         }
         
+        :root {
+            --primary: #004080;
+            --primary-dark: #002b57;
+            --primary-light: #e6f0fa;
+            --secondary: #f39c12;
+            --secondary-dark: #e67e22;
+            --light: #f5f5f5;
+            --dark: #222;
+            --text: #333;
+            --text-light: #666;
+            --white: #fff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        /* Layout */
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         
-        /* Top Bar */
-        .top-bar {
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px 0;
-            font-size: 14px;
+        section {
+            padding: 100px 0;
+            position: relative;
         }
         
-        .top-bar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--primary);
+            font-size: 2.5rem;
         }
         
-        .top-bar select {
-            background: transparent;
-            border: 1px solid #34495e;
-            color: white;
-            padding: 5px;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
-        
-        .auth-buttons a {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--secondary);
+            margin: 20px auto;
+            border-radius: 3px;
         }
         
         /* Header */
-        .main-header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
+        header {
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
         }
         
-        .main-nav {
+        header.scrolled {
+            background-color: rgba(0, 64, 128, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        header.scrolled .logo,
+        header.scrolled nav a {
+            color: var(--white);
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 20px 0;
         }
         
         .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
             display: flex;
             align-items: center;
         }
         
-        .logo-icon {
-            color: #e74c3c;
-            font-size: 24px;
-            margin-left: 10px;
+        .logo span {
+            color: var(--secondary);
+            margin-right: 5px;
         }
         
-        .logo-text {
-            font-weight: 700;
-            font-size: 24px;
-            color: #2c3e50;
-        }
-        
-        .nav-links {
+        nav ul {
             display: flex;
             list-style: none;
         }
         
-        .nav-links li a {
-            text-decoration: none;
-            color: #34495e;
-            padding: 10px 15px;
-            font-weight: 500;
+        nav ul li {
+            margin-right: 30px;
         }
         
-        .nav-links li a i {
-            margin-left: 5px;
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        
+        nav a {
+            font-weight: 600;
+            color: var(--text);
+            position: relative;
+            padding: 10px 0;
+            transition: var(--transition);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+            right: auto;
+            left: 0;
         }
         
         .mobile-menu-btn {
             display: none;
-            font-size: 24px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
             cursor: pointer;
+            color: var(--primary);
         }
         
         /* Hero Section */
         .hero {
-            background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 500px;
-            position: relative;
+            height: 100vh;
+            min-height: 800px;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 32, 64, 0.85), rgba(0, 32, 64, 0.9)), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+            color: var(--white);
+            text-align: center;
         }
         
-        .hero-overlay {
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 0;
+            bottom: -50px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            right: 0;
+            height: 100px;
+            background: var(--white);
+            clip-path: polygon(0 70%, 100% 0, 100% 100%, 0% 100%);
         }
         
         .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
             position: relative;
             z-index: 1;
-            color: white;
-            width: 100%;
         }
         
-        .hero-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .hero-subtitle {
-            font-size: 18px;
+        .hero h1 {
+            font-size: 3.5rem;
             margin-bottom: 30px;
+            animation: fadeInDown 1.2s ease-out;
         }
         
-        /* Search Tabs */
-        .search-tabs {
-            background-color: white;
-            border-radius: 8px;
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            animation: fadeIn 1s ease 0.6s both;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.4);
+            background: var(--secondary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            margin-left: 20px;
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            background: #25D366;
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+        
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            animation: fadeInLeft 1s ease-out;
         }
         
-        .tab-buttons {
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content h2 {
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        
+        /* Services Section */
+        .services {
+            background: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            height: 200px;
             display: flex;
-            background-color: #f8f9fa;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+            background: var(--primary-light);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .service-content p {
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .service-btn:hover {
+            background: var(--primary-dark);
+            transform: translateX(-5px);
+        }
+        
+        /* Companies Section */
+        .companies {
+            background: var(--white);
+        }
+        
+        .company-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .tab-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: none;
+            padding: 12px 30px;
+            background: var(--light);
+            border-radius: 50px;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            font-size: 1.1rem;
         }
         
         .tab-btn.active {
-            background-color: white;
-            color: #e74c3c;
-            border-bottom: 2px solid #e74c3c;
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 64, 128, 0.3);
         }
         
-        .tab-content {
-            padding: 20px;
+        .tab-btn:hover:not(.active) {
+            background: var(--primary-light);
+            color: var(--primary);
         }
         
-        .tab-panel {
-            display: none;
+        .companies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
         
-        .tab-panel.active {
-            display: block;
+        .company-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: scale(0.95);
+            animation: scaleIn 0.8s ease forwards;
         }
         
-        /* Search Forms */
-        .search-form {
+        .company-card:nth-child(1) { animation-delay: 0.1s; }
+        .company-card:nth-child(2) { animation-delay: 0.2s; }
+        .company-card:nth-child(3) { animation-delay: 0.3s; }
+        .company-card:nth-child(4) { animation-delay: 0.4s; }
+        .company-card:nth-child(5) { animation-delay: 0.5s; }
+        .company-card:nth-child(6) { animation-delay: 0.6s; }
+        .company-card:nth-child(7) { animation-delay: 0.7s; }
+        .company-card:nth-child(8) { animation-delay: 0.8s; }
+        .company-card:nth-child(9) { animation-delay: 0.9s; }
+        .company-card:nth-child(10) { animation-delay: 1s; }
+        
+        .company-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .company-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .company-img img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
         }
         
-        .form-row {
+        .company-card:hover .company-img img {
+            transform: scale(1.1);
+        }
+        
+        .company-header {
+            padding: 25px;
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .company-header h3 {
+            color: var(--white);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .company-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .company-body {
+            padding: 25px;
+        }
+        
+        .company-info {
             display: flex;
+            align-items: flex-start;
             margin-bottom: 15px;
         }
         
-        .form-group {
-            flex: 1;
-            margin-left: 15px;
+        .company-info i {
+            margin-left: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 3px;
         }
         
-        .form-group:first-child {
-            margin-left: 0;
+        .company-info p {
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        
+        .company-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .company-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 64, 128, 0.3);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: var(--light);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .info-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .info-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-group input, 
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .search-btn {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        /* Featured Sections */
-        .featured-section {
-            padding: 50px 0;
-        }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 28px;
-            color: #2c3e50;
-        }
-        
-        .view-all {
-            color: #e74c3c;
-            text-decoration: none;
-        }
-        
-        /* Cards */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .card-image {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .card-rating {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        
-        .card-info {
-            padding: 15px;
-        }
-        
-        .card-title {
-            font-size: 18px;
             margin-bottom: 10px;
-        }
-        
-        .card-location {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        
-        .card-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-        
-        .card-features span {
-            background-color: #f8f9fa;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-        
-        .card-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .price {
+            color: var(--primary);
             font-weight: 700;
-            color: #e74c3c;
+            font-size: 1.1rem;
         }
         
-        .view-btn {
-            background-color: #3498db;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        
-        /* Why Us Section */
-        .why-us-section {
-            background-color: #f8f9fa;
-            padding: 50px 0;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .feature-card {
-            background-color: white;
-            padding: 20px;
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--light);
             border-radius: 8px;
-            text-align: center;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            background: var(--light);
         }
         
-        .feature-icon {
-            font-size: 40px;
-            color: #e74c3c;
-            margin-bottom: 15px;
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.2);
+            background: var(--white);
+        }
+        
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 64, 128, 0.3);
         }
         
         /* Footer */
-        .main-footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 50px 0 20px;
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 80px 0 30px;
         }
         
-        .footer-grid {
+        .footer-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
         }
         
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 1.8rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
         }
         
         .footer-links {
@@ -385,801 +675,2087 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .footer-links a {
-            color: #bdc3c7;
-            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            font-size: 1.1rem;
+            display: inline-block;
         }
         
-        .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 20px;
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(-5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
             text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
         }
         
-        /* Responsive */
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toast i {
+            margin-left: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Lazy Load */
+        .lazy-img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .lazy-img.loaded {
+            opacity: 1;
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.8);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            padding: 25px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-header h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            section {
+                padding: 80px 0;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .about-img {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .service-card, .company-card {
+                max-width: 450px;
+                margin: 0 auto;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .header-container {
+                padding: 15px 0;
             }
             
             .mobile-menu-btn {
                 display: block;
             }
             
-            .hero {
-                height: 400px;
+            nav {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background: var(--primary);
+                transition: var(--transition);
+                z-index: 999;
+                padding: 40px;
             }
             
-            .form-row {
-                flex-wrap: wrap;
+            nav.active {
+                right: 0;
             }
             
-            .form-group {
-                flex: 100%;
-                margin-left: 0;
-                margin-bottom: 15px;
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
+            }
+            
+            nav a {
+                color: var(--white);
+                font-size: 1.3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .services-grid, .companies-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                order: 2;
+            }
+            
+            .contact-form {
+                order: 1;
             }
         }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .service-content, .company-body, .contact-form {
+                padding: 20px;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes pulseSmall {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-10deg); }
+            20% { transform: rotateZ(8deg); }
+            25% { transform: rotateZ(-6deg); }
+            30% { transform: rotateZ(4deg); }
+            35% { transform: rotateZ(-2deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+        
+        @keyframes swing {
+            20% { transform: rotate(10deg); }
+            40% { transform: rotate(-8deg); }
+            60% { transform: rotate(5deg); }
+            80% { transform: rotate(-3deg); }
+            100% { transform: rotate(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes rotateReverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        @keyframes flip {
+            from {
+                opacity: 0;
+                transform: perspective(400px) rotateY(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(400px) rotateY(0);
+            }
+        }
+        
+        @keyframes flipX {
+            from {
+                opacity: 0;
+                transform: perspective(400px) rotateX(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(400px) rotateX(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes zoomOut {
+            from {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes lightSpeedIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px) skewX(-30deg);
+            }
+            60% {
+                opacity: 1;
+                transform: skewX(20deg);
+            }
+            80% {
+                transform: skewX(-5deg);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes lightSpeedOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100px) skewX(30deg);
+            }
+        }
+        
+        @keyframes swirlIn {
+            from {
+                opacity: 0;
+                transform: rotate(-540deg) scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+        
+        @keyframes swirlOut {
+            from {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(540deg) scale(0);
+            }
+        }
+        
+        @keyframes bounceIn {
+            from, 20%, 40%, 60%, 80%, to {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            to {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        @keyframes bounceOut {
+            20% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            50%, 55% {
+                opacity: 1;
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            to {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+        }
+        
+        @keyframes flash {
+            from, 50%, to {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0.3;
+            }
+        }
+        
+        @keyframes shake {
+            from, to {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-10px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(10px);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes sink {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rubberBand {
+            from {
+                transform: scale3d(1, 1, 1);
+            }
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+            to {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        @keyframes jello {
+            from, 11.1%, to {
+                transform: translate3d(0, 0, 0);
+            }
+            22.2% {
+                transform: skewX(-12.5deg) skewY(-12.5deg);
+            }
+            33.3% {
+                transform: skewX(6.25deg) skewY(6.25deg);
+            }
+            44.4% {
+                transform: skewX(-3.125deg) skewY(-3.125deg);
+            }
+            55.5% {
+                transform: skewX(1.5625deg) skewY(1.5625deg);
+            }
+            66.6% {
+                transform: skewX(-0.78125deg) skewY(-0.78125deg);
+            }
+            77.7% {
+                transform: skewX(0.390625deg) skewY(0.390625deg);
+            }
+            88.8% {
+                transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+            }
+        }
+        
+        @keyframes tada {
+            from {
+                transform: scale3d(1, 1, 1);
+            }
+            10%, 20% {
+                transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+            }
+            30%, 50%, 70%, 90% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+            }
+            40%, 60%, 80% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+            }
+            to {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        @keyframes wobble {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            15% {
+                transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            }
+            30% {
+                transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            }
+            45% {
+                transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            }
+            60% {
+                transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            }
+            75% {
+                transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        
+        @keyframes hinge {
+            0% {
+                transform-origin: top left;
+                animation-timing-function: ease-in-out;
+            }
+            20%, 60% {
+                transform: rotate3d(0, 0, 1, 80deg);
+                transform-origin: top left;
+                animation-timing-function: ease-in-out;
+            }
+            40%, 80% {
+                transform: rotate3d(0, 0, 1, 60deg);
+                transform-origin: top left;
+                animation-timing-function: ease-in-out;
+                opacity: 1;
+            }
+            to {
+                transform: translate3d(0, 700px, 0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rollIn {
+            from {
+                opacity: 0;
+                transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        
+        @keyframes rollOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+            }
+        }
+        
+        @keyframes flipInX {
+            from {
+                transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                animation-timing-function: ease-in;
+                opacity: 0;
+            }
+            40% {
+                transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                animation-timing-function: ease-in;
+            }
+            60% {
+                transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+                opacity: 1;
+            }
+            80% {
+                transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+            }
+            to {
+                transform: perspective(400px);
+            }
+        }
+        
+        @keyframes flipInY {
+            from {
+                transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+                animation-timing-function: ease-in;
+                opacity: 0;
+            }
+            40% {
+                transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+                animation-timing-function: ease-in;
+            }
+            60% {
+                transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+                opacity: 1;
+            }
+            80% {
+                transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+            }
+            to {
+                transform: perspective(400px);
+            }
+        }
+        
+        @keyframes flipOutX {
+            from {
+                transform: perspective(400px);
+            }
+            30% {
+                transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+                opacity: 1;
+            }
+            to {
+                transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes flipOutY {
+            from {
+                transform: perspective(400px);
+            }
+            30% {
+                transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+                opacity: 1;
+            }
+            to {
+                transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-bounce { animation: bounce 1s infinite; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-pulse-small { animation: pulseSmall 2s infinite; }
+        .animate-wiggle { animation: wiggle 1s ease; }
+        .animate-swing { animation: swing 1s ease; }
+        .animate-rotate { animation: rotate 2s linear infinite; }
+        .animate-rotate-reverse { animation: rotateReverse 2s linear infinite; }
+        .animate-flip { animation: flip 0.6s ease forwards; }
+        .animate-flip-x { animation: flipX 0.6s ease forwards; }
+        .animate-light-speed { animation: lightSpeedIn 0.5s ease forwards; }
+        .animate-light-speed-out { animation: lightSpeedOut 0.5s ease forwards; }
+        .animate-swirl { animation: swirlIn 0.6s ease forwards; }
+        .animate-swirl-out { animation: swirlOut 0.6s ease forwards; }
+        .animate-bounce-in { animation: bounceIn 0.75s ease forwards; }
+        .animate-bounce-out { animation: bounceOut 0.75s ease forwards; }
+        .animate-flash { animation: flash 1s ease forwards; }
+        .animate-shake { animation: shake 0.5s ease forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-sink { animation: sink 3s ease-in-out infinite; }
+        .animate-rubber-band { animation: rubberBand 0.75s ease forwards; }
+        .animate-jello { animation: jello 0.75s ease forwards; }
+        .animate-tada { animation: tada 0.75s ease forwards; }
+        .animate-wobble { animation: wobble 0.75s ease forwards; }
+        .animate-hinge { animation: hinge 1s ease forwards; }
+        .animate-roll-in { animation: rollIn 0.6s ease forwards; }
+        .animate-roll-out { animation: rollOut 0.6s ease forwards; }
+        .animate-flip-in-x { animation: flipInX 0.75s ease forwards; }
+        .animate-flip-in-y { animation: flipInY 0.75s ease forwards; }
+        .animate-flip-out-x { animation: flipOutX 0.75s ease forwards; }
+        .animate-flip-out-y { animation: flipOutY 0.75s ease forwards; }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-content">
-                <div>
-                    <select id="currency">
-                        <option value="SYP">SYP ليرة سورية</option>
-                        <option value="USD">USD دولار أمريكي</option>
-                    </select>
-                    <select id="language">
-                        <option value="ar" selected>العربية</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-                <div>
-                    <a href="#" class="login-btn">تسجيل الدخول</a>
-                    <a href="#" class="register-btn">حساب جديد</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Header -->
-    <header class="main-header">
-        <div class="container">
-            <nav class="main-nav">
-                <div class="logo">
-                    <a href="#">
-                        <span class="logo-icon"><i class="fas fa-hotel"></i></span>
-                        <span class="logo-text">Alkneter</span>
-                    </a>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#hotels"><i class="fas fa-hotel"></i> الفنادق</a></li>
-                    <li><a href="#flights"><i class="fas fa-plane"></i> الطيران</a></li>
-                    <li><a href="#car-rental"><i class="fas fa-car"></i> تأجير السيارات</a></li>
-                    <li><a href="#umrah"><i class="fas fa-kaaba"></i> الحج والعمرة</a></li>
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo"><span>ArkoPro</span>
+            
+            <button class="mobile-menu-btn">☰</button>
+            
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+
+                    <li><a href="#services" class="nav-link">الخدمات</a></li>
+
+                    <li><a href="#companies" class="nav-link">الشركات</a></li>
+                    
+                    <li><a href="#contact" class="nav-link">اتصل بنا</a></li>
                 </ul>
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>اكتشف سوريا مع <span class="animate-pulse">Arko Pro</span></h1>
+            <p>نقدم أفضل خدمات السفر والسياحة في جميع أنحاء سوريا. حجز فنادق، تأجير سيارات، رحلات حج وعمرة، جولات سياحية وتأمين سفر.</p>
+            <div>
+                <a href="#services" class="btn btn-outline animate-wiggle">استكشف الخدمات</a>
+                <a href="#contact" class="btn animate-bounce">اتصل بنا</a>
+            </div>
+            <a href="https://wa.me/9053421738887" class="whatsapp-btn" target="_blank">
+                <span>راسلنا على واتساب</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Alkneter دليلك الشامل للسفر</h1>
-                <p class="hero-subtitle">احجز فنادق، طيران، سيارات وحجوزات العمرة بأفضل الأسعار</p>
+            <h2 class="section-title">من نحن</h2>
+            
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Arko Pro Team" class="lazy-img">
+                </div>
                 
-                <!-- Search Tabs -->
-                <div class="search-tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="hotels"><i class="fas fa-hotel"></i> فنادق</button>
-                        <button class="tab-btn" data-tab="flights"><i class="fas fa-plane"></i> طيران</button>
-                        <button class="tab-btn" data-tab="car-rental"><i class="fas fa-car"></i> تأجير سيارات</button>
-                        <button class="tab-btn" data-tab="umrah"><i class="fas fa-kaaba"></i> العمرة</button>
+                <div class="about-content">
+                    <h2 class="animate-flip-in-y">Arko Pro للسياحة والسفر</h2>
+                    <p class="animate-fadeIn">نحن شركة رائدة في مجال السياحة والسفر في سوريا، نقدم حلولاً متكاملة لجميع احتياجات سفرك منذ عام 2010.</p>
+                    <p class="animate-fadeIn">فريقنا من المحترفين يسعى دائماً لتقديم أفضل الخدمات لعملائنا الكرام بأعلى معايير الجودة والكفاءة.</p>
+                    <p class="animate-fadeIn">نعمل مع أفضل الشركات والفنادق المحلية لتقديم تجربة سفر لا تُنسى في جميع أنحاء سوريا.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">خدماتنا</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏨</div>
+                    <div class="service-content">
+                        <h3>حجز الفنادق</h3>
+                        <p>احجز أفضل الفنادق في جميع أنحاء سوريا بأسعار تنافسية وضمان أفضل خدمة.</p>
+                        <a href="#" class="service-btn" data-service="hotels">عرض الشركات</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <div class="service-content">
+                        <h3>تأجير السيارات</h3>
+                        <p>خدمة تأجير السيارات مع سائق أو بدون سائق لمختلف الاحتياجات.</p>
+                        <a href="#" class="service-btn" data-service="cars">عرض الشركات</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🕋</div>
+                    <div class="service-content">
+                        <h3>رحلات الحج والعمرة</h3>
+                        <p>تنظيم رحلات الحج والعمرة ببرامج متكاملة وتسهيل جميع الإجراءات.</p>
+                        <a href="#" class="service-btn" data-service="hajj">عرض الشركات</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏝️</div>
+                    <div class="service-content">
+                        <h3>جولات سياحية</h3>
+                        <p>اكتشف سوريا مع أفضل الجولات السياحية المصممة خصيصاً لك.</p>
+                        <a href="#" class="service-btn" data-service="tours">عرض الشركات</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <div class="service-content">
+                        <h3>التأمين والسفر</h3>
+                        <p>نقدم أفضل بوالص التأمين للسفر لتغطية جميع المخاطر المحتملة.</p>
+                        <a href="#" class="service-btn" data-service="insurance">عرض الشركات</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <div class="service-content">
+                        <h3>علاج طبي سياحي</h3>
+                        <p>حزم علاجية متكاملة مع إقامة فندقية وخدمات نقل.</p>
+                        <a href="#" class="service-btn" data-service="medical">عرض الشركات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="companies" id="companies">
+        <div class="container">
+            <h2 class="section-title">شركاؤنا</h2>
+            
+            <div class="company-tabs">
+                <button class="tab-btn active" data-tab="all">الكل</button>
+                <button class="tab-btn" data-tab="hotels">فنادق</button>
+                <button class="tab-btn" data-tab="cars">تأجير سيارات</button>
+                <button class="tab-btn" data-tab="hajj">حج وعمرة</button>
+                <button class="tab-btn" data-tab="tours">جولات سياحية</button>
+                <button class="tab-btn" data-tab="insurance">تأمين</button>
+                <button class="tab-btn" data-tab="medical">طبي سياحي</button>
+            </div>
+            
+            <div class="companies-container">
+                <!-- Hotels -->
+                <div class="company-card" data-category="hotels">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="فندق الشام" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>فندق الشام</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع النصر، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-1234567</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.shamhotel.sy</p>
+                        </div>
+                        <button class="company-btn" data-company="1">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="hotels">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="فندق أفاميا" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>فندق أفاميا</h3>
+                        <p>حمص</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع القوتلي، حمص</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>031-7654321</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.afamiahotel.com</p>
+                        </div>
+                        <button class="company-btn" data-company="2">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="hotels">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="فندق البارون" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>فندق البارون</h3>
+                        <p>حلب</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>ساحة سعد الله الجابري، حلب</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>021-9876543</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.baronhotel-aleppo.com</p>
+                        </div>
+                        <button class="company-btn" data-company="3">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <!-- Car Rental -->
+                <div class="company-card" data-category="cars">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة المفتاح الذهبي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة المفتاح الذهبي</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>المزة، شارع بغداد، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-2345678</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.goldenkey-sy.com</p>
+                        </div>
+                        <button class="company-btn" data-company="4">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="cars">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة طريق الشام" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة طريق الشام</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>برزة، شارع الرئيس، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-8765432</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.shamway.com</p>
+                        </div>
+                        <button class="company-btn" data-company="5">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="cars">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة الأسد للتأجير" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة الأسد للتأجير</h3>
+                        <p>حلب</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع الجمهورية، حلب</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>021-3456789</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.alsadrent.com</p>
+                        </div>
+                        <button class="company-btn" data-company="6">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <!-- Hajj & Umrah -->
+                <div class="company-card" data-category="hajj">
+                    <div class="company-img">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.p4GrLSxbi9hJzbm6s2x8eQHaDS?rs=1&pid=ImgDetMain" alt="شركة دار الإيمان" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة دار الإيمان</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>ركن الدين، شارع السيدة زينب، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-4567890</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.dareleman.com</p>
+                        </div>
+                        <button class="company-btn" data-company="7">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="hajj">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة الروابي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة الروابي</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>الميدان، شارع حسن الخراط، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-5678901</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.alrawabitours.com</p>
+                        </div>
+                        <button class="company-btn" data-company="8">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="hajj">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة النور" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة النور</h3>
+                        <p>حمص</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع القصاصين، حمص</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>031-6789012</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.alnourhaj.com</p>
+                        </div>
+                        <button class="company-btn" data-company="9">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <!-- Tours -->
+                <div class="company-card" data-category="tours">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة شام تور" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة شام تور</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>أبو رمانة، شارع 29 أيار، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-7890123</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.shamtours.com</p>
+                        </div>
+                        <button class="company-btn" data-company="10">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="tours">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة الدليل السياحي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة الدليل السياحي</h3>
+                        <p>حلب</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>العزيزية، شارع تشرين، حلب</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>021-8901234</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.aldaliltours.com</p>
+                        </div>
+                        <button class="company-btn" data-company="11">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="tours">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة سوريانا تورز" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة سوريانا تورز</h3>
+                        <p>اللاذقية</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع 8 آذار، اللاذقية</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>041-9012345</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.syrianatours.com</p>
+                        </div>
+                        <button class="company-btn" data-company="12">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <!-- Insurance -->
+                <div class="company-card" data-category="insurance">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="شركة الوطنية للتأمين" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>شركة الوطنية للتأمين</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>الصالحية، شارع بغداد، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-3456789</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.alwatania-ins.com</p>
+                        </div>
+                        <button class="company-btn" data-company="13">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="insurance">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="السورية للتأمين" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>السورية للتأمين</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>المزة، شارع الجامعة، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-4567890</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.syrianins.com</p>
+                        </div>
+                        <button class="company-btn" data-company="14">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="insurance">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="الأهلية للتأمين" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>الأهلية للتأمين</h3>
+                        <p>حلب</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>السليمانية، شارع الملك فيصل، حلب</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>021-5678901</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.ahlia-insurance.com</p>
+                        </div>
+                        <button class="company-btn" data-company="15">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <!-- Medical Tourism -->
+                <div class="company-card" data-category="medical">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="مركز الشام الطبي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>مركز الشام الطبي</h3>
+                        <p>دمشق</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>مزة، شارع النصر، دمشق</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>011-6789012</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.shammedical.com</p>
+                        </div>
+                        <button class="company-btn" data-company="16">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="medical">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="مستشفى الأمل التخصصي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>مستشفى الأمل التخصصي</h3>
+                        <p>حلب</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع الجمهورية، حلب</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>021-7890123</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.alamalhospital.com</p>
+                        </div>
+                        <button class="company-btn" data-company="17">عرض التفاصيل</button>
+                    </div>
+                </div>
+                
+                <div class="company-card" data-category="medical">
+                    <div class="company-img">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="مركز الحياة الطبي" class="lazy-img">
+                    </div>
+                    <div class="company-header">
+                        <h3>مركز الحياة الطبي</h3>
+                        <p>حمص</p>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-info">
+                            <i>📍</i>
+                            <p>شارع القوتلي، حمص</p>
+                        </div>
+                        <div class="company-info">
+                            <i>📞</i>
+                            <p>031-8901234</p>
+                        </div>
+                        <div class="company-info">
+                            <i>🌐</i>
+                            <p>www.lifemedical.com</p>
+                        </div>
+                        <button class="company-btn" data-company="18">عرض التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>العنوان</h3>
+                            <p>دمشق، سوريا</p>
+                        </div>
                     </div>
                     
-                    <div class="tab-content">
-                        <!-- Hotels Tab -->
-                        <div class="tab-panel active" id="hotels-tab">
-                            <form class="search-form" id="hotel-search">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="hotel-destination"><i class="fas fa-map-marker-alt"></i> الوجهة</label>
-                                        <input type="text" id="hotel-destination" placeholder="أدخل المدينة أو الفندق">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ الوصول</label>
-                                        <input type="date" id="check-in">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ المغادرة</label>
-                                        <input type="date" id="check-out">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-user-friends"></i> الضيوف</label>
-                                        <select id="guests">
-                                            <option>1 بالغ</option>
-                                            <option selected>2 بالغين</option>
-                                            <option>عائلة (2+2)</option>
-                                            <option>مجموعة</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-bed"></i> الغرف</label>
-                                        <select id="rooms">
-                                            <option>1 غرفة</option>
-                                            <option selected>2 غرف</option>
-                                            <option>3 غرف</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-                                    </div>
-                                </div>
-                            </form>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>الهاتف</h3>
+                            <p>011-1234567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <h3>البريد الإلكتروني</h3>
+                            <p>info@arkopro.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">🕒</div>
+                        <div class="info-content">
+                            <h3>ساعات العمل</h3>
+                            <p>من الأحد إلى الخميس: 9 صباحاً - 5 مساءً</p>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/9053421738887" class="whatsapp-btn" target="_blank">
+                        <span>راسلنا على واتساب</span>
+                    </a>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" class="form-control" required>
                         </div>
                         
-                        <!-- Flights Tab -->
-                        <div class="tab-panel" id="flights-tab">
-                            <form class="search-form" id="flight-search">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="flight-from"><i class="fas fa-plane-departure"></i> من</label>
-                                        <input type="text" id="flight-from" placeholder="المدينة أو المطار">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="flight-to"><i class="fas fa-plane-arrival"></i> إلى</label>
-                                        <input type="text" id="flight-to" placeholder="المدينة أو المطار">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ السفر</label>
-                                        <input type="date" id="flight-date">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-user-friends"></i> المسافرون</label>
-                                        <select id="passengers">
-                                            <option>1 مسافر</option>
-                                            <option selected>2 مسافرين</option>
-                                            <option>عائلة</option>
-                                            <option>مجموعة</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-chair"></i> درجة السفر</label>
-                                        <select id="flight-class">
-                                            <option>السياحية</option>
-                                            <option>رجال الأعمال</option>
-                                            <option>الأولى</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" class="form-control" required>
                         </div>
                         
-                        <!-- Car Rental Tab -->
-                        <div class="tab-panel" id="car-rental-tab">
-                            <form class="search-form" id="car-search">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="car-location"><i class="fas fa-map-marker-alt"></i> المكان</label>
-                                        <input type="text" id="car-location" placeholder="المدينة أو الموقع">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ الاستلام</label>
-                                        <input type="date" id="pickup-date">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ التسليم</label>
-                                        <input type="date" id="dropoff-date">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-car"></i> نوع السيارة</label>
-                                        <select id="car-type">
-                                            <option>اقتصادية</option>
-                                            <option>متوسطة</option>
-                                            <option>SUV</option>
-                                            <option>فاخرة</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" class="form-control">
                         </div>
                         
-                        <!-- Umrah Tab -->
-                        <div class="tab-panel" id="umrah-tab">
-                            <form class="search-form" id="umrah-search">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="umrah-from"><i class="fas fa-plane-departure"></i> مدينة المغادرة</label>
-                                        <input type="text" id="umrah-from" placeholder="المدينة">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-calendar-alt"></i> تاريخ السفر</label>
-                                        <input type="date" id="umrah-date">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-clock"></i> المدة</label>
-                                        <select id="umrah-duration">
-                                            <option>7 أيام</option>
-                                            <option>10 أيام</option>
-                                            <option>14 يوم</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label><i class="fas fa-user-friends"></i> المسافرون</label>
-                                        <select id="umrah-passengers">
-                                            <option>1 مسافر</option>
-                                            <option selected>2 مسافرين</option>
-                                            <option>عائلة</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label><i class="fas fa-hotel"></i> فئة الفندق</label>
-                                        <select id="umrah-hotel">
-                                            <option>3 نجوم</option>
-                                            <option>4 نجوم</option>
-                                            <option>5 نجوم</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <button type="submit" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" class="form-control" required></textarea>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hotels Section -->
-    <section class="featured-section" id="hotels">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">فنادق مميزة في سوريا</h2>
-                <a href="#" class="view-all">عرض الكل</a>
-            </div>
-            
-            <div class="cards-grid">
-                <!-- Hotel 1 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://www.syria.tv/sites/default/files/styles/detailed_thumb_/public/2024-11/270097827_448893090061986_4826664044708779374_n.png?itok=9dQia8W3')">
-                        <span class="card-rating">4.5 <i class="fas fa-star"></i></span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">فندق الشام الكبير</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-wifi"></i> واي فاي</span>
-                            <span><i class="fas fa-swimming-pool"></i> مسبح</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">50,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hotel 2 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.rBBYbR_SUUCGfUDSq60MbgAAAA?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">4.2 <i class="fas fa-star"></i></span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">فندق أمواج اللاذقية</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> اللاذقية، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-umbrella-beach"></i> شاطئ خاص</span>
-                            <span><i class="fas fa-utensils"></i> مطعم</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">65,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hotel 3 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.agbkBSoIdhw5PxHaIte_kgHaEK?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">4.7 <i class="fas fa-star"></i></span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">فندق قصر حلب</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حلب، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-spa"></i> سبا</span>
-                            <span><i class="fas fa-dumbbell"></i> جيم</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">75,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hotel 4 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.1J4buVB6IWpqSMDxHRMNtwHaE8?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">4.0 <i class="fas fa-star"></i></span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">فندق بوسيدون</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> طرطوس، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-umbrella-beach"></i> شاطئ خاص</span>
-                            <span><i class="fas fa-cocktail"></i> بار</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">55,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Flights Section -->
-    <section class="featured-section" id="flights">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">رحلات جوية مميزة</h2>
-                <a href="#" class="view-all">عرض الكل</a>
-            </div>
-            
-            <div class="cards-grid">
-                <!-- Flight 1 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Tupolev_Tu-134B_Syrian_Airlines.JPG/300px-Tupolev_Tu-134B_Syrian_Airlines.JPG')">
-                        <span class="card-rating"><i class="fas fa-plane"></i> سيريان إير</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">دمشق → دبي</h3>
-                        <p class="card-location"><i class="far fa-clock"></i> 3 ساعات 10 دقائق</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-suitcase"></i> أمتعة 23kg</span>
-                            <span><i class="fas fa-utensils"></i> وجبة</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">350,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Flight 2 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.RzdGk7umvEF58t_VyNgVpgHaE7?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating"><i class="fas fa-plane"></i> طيران الخليج</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">دمشق → الدوحة</h3>
-                        <p class="card-location"><i class="far fa-clock"></i> 2 ساعات 30 دقائق</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-suitcase"></i> أمتعة 30kg</span>
-                            <span><i class="fas fa-utensils"></i> وجبة</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">420,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Flight 3 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://th.bing.com/th/id/R.9a9588b73ff587d03b0a8342530f24c7?rik=MpKT5rG6Fq91mw&riu=http%3a%2f%2ftaylorwimpeyspain.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2fturkish-airlines.jpg&ehk=RcVEGZKoY30ntDzn67WoCJe2jUljP1rOwEykme%2bBDnc%3d&risl=&pid=ImgRaw&r=0')">
-                        <span class="card-rating"><i class="fas fa-plane"></i> الطيران التركي</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">حلب → اسطنبول</h3>
-                        <p class="card-location"><i class="far fa-clock"></i> 1 ساعة 50 دقيقة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-suitcase"></i> أمتعة 20kg</span>
-                            <span><i class="fas fa-utensils"></i> وجبة خفيفة</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">280,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Flight 4 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://th.bing.com/th/id/R.82a45c0249621418687e0f5367e3ebab?rik=bak91OtOD9l%2fEw&pid=ImgRaw&r=0')">
-                        <span class="card-rating"><i class="fas fa-plane"></i> مصر للطيران</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">دمشق → القاهرة</h3>
-                        <p class="card-location"><i class="far fa-clock"></i> 1 ساعة 30 دقيقة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-suitcase"></i> أمتعة 23kg</span>
-                            <span><i class="fas fa-utensils"></i> وجبة</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">250,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Car Rental Section -->
-    <section class="featured-section" id="car-rental">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">سيارات للتأجير</h2>
-                <a href="#" class="view-all">عرض الكل</a>
-            </div>
-            
-            <div class="cards-grid">
-                <!-- Car 1 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse4.mm.bing.net/th/id/OIP.kY9udpeqzgVlP1SC-boKuAHaEP?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating"><i class="fas fa-car"></i> اقتصادية</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">تويوتا ياريس 2023</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
-                            <span><i class="fas fa-cog"></i> أوتوماتيك</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">75,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Car 2 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.D6gMlFU4MoxLrzKrRlzW7AHaEo?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating"><i class="fas fa-car"></i> SUV</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">هيونداي توسان 2022</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حلب، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
-                            <span><i class="fas fa-user-friends"></i> 7 مقاعد</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">120,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Car 3 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.RJvgA1q2vJkBc5hAxpoPiQHaEV?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating"><i class="fas fa-car"></i> فاخرة</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">مرسيدس E200 2021</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> اللاذقية، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
-                            <span><i class="fas fa-bolt"></i> كاملة المواصفات</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">200,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Car 4 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP._u_htXgmJ17msZlPMJ3yTQHaEo?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating"><i class="fas fa-car"></i> عائلية</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">كيا كارينز 2022</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> حمص، سوريا</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-gas-pump"></i> بنزين</span>
-                            <span><i class="fas fa-user-friends"></i> 7 مقاعد</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">100,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Umrah Section -->
-    <section class="featured-section" id="umrah">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">عروض العمرة المميزة</h2>
-                <a href="#" class="view-all">عرض الكل</a>
-            </div>
-            
-            <div class="cards-grid">
-                <!-- Umrah 1 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.X_Rl0TWvWuZ-7v9qWGAiCQHaEK?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">عمرة مميزة</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">عمرة رمضان 2025</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-hotel"></i> فندق 4 نجوم</span>
-                            <span><i class="fas fa-utensils"></i> إفطار وسحور</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">2,500,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Umrah 2 -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.cGI7y-9RF2DkTy3mIZfmAwHaEO?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">عمرة اقتصادية</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">عمرة شعبان 2025</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من حلب إلى مكة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-hotel"></i> فندق 3 نجوم</span>
-                            <span><i class="fas fa-bus"></i> مواصلات مشتركة</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">1,800,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hajj -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.AfNFNcxXoLdTHa7RRUudRAHaE8?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">حج 2025</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">حج القرعة 2025</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-hotel"></i> فندق 5 نجوم</span>
-                            <span><i class="fas fa-user-tie"></i> مرشد حج</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">5,000,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Umrah Family -->
-                <div class="card">
-                    <div class="card-image" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP._Hb3S8JH1V4mv78qrc9vAQHaE8?rs=1&pid=ImgDetMain')">
-                        <span class="card-rating">عمرة عائلية</span>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">عمرة العائلة 2025</h3>
-                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> من دمشق إلى مكة</p>
-                        <div class="card-features">
-                            <span><i class="fas fa-hotel"></i> شقق فندقية</span>
-                            <span><i class="fas fa-child"></i> أنشطة للأطفال</span>
-                        </div>
-                        <div class="card-price">
-                            <span class="price">3,200,000 ل.س</span>
-                            <a href="#" class="view-btn">احجز الآن</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        
-    <!-- Why Us Section -->
-    <section class="why-us-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">لماذا تختار Alkneter؟</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-percentage"></i>
-                    </div>
-                    <h3>أفضل الأسعار</h3>
-                    <p>نضمن لك أفضل الأسعار مع عروض حصرية وخصومات تصل إلى 50%</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>دعم فني 24/7</h3>
-                    <p>فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>حجوزات آمنة</h3>
-                    <p>نستخدم أحدث أنظمة التشفير لحماية بياناتك ومدفوعاتك</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>خيارات متنوعة</h3>
-                    <p>آلاف الفنادق والوجهات حول العالم لتختار منها ما يناسبك</p>
+                        
+                        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">
-                        <i class="fas fa-hotel"></i> Alkneter
-                    </div>
-                    <p style="margin: 15px 0; color: #bdc3c7;">
-                        منصة رائدة في حجوزات الفنادق والطيران وتأجير السيارات في سوريا والوطن العربي.
-                    </p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: white;"><i class="fab fa-instagram"></i></a>
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Arko Pro</h3>
+                    <p>منصة متكاملة لخدمات السفر والسياحة في سوريا، نقدم حلولاً مبتكرة لعملائنا منذ عام 2010.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 style="margin-bottom: 15px;">روابط سريعة</h3>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
                     <ul class="footer-links">
-                        <li><a href="#">الصفحة الرئيسية</a></li>
-                        <li><a href="#">الفنادق</a></li>
-                        <li><a href="#">الطيران</a></li>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#companies">الشركات</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>خدماتنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">حجز الفنادق</a></li>
                         <li><a href="#">تأجير السيارات</a></li>
+                        <li><a href="#">رحلات الحج والعمرة</a></li>
+                        <li><a href="#">جولات سياحية</a></li>
+                        <li><a href="#">التأمين والسفر</a></li>
+                        <li><a href="#">علاج طبي سياحي</a></li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h3 style="margin-bottom: 15px;">المساعدة</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">الأسئلة الشائعة</a></li>
-                        <li><a href="#">شروط الاستخدام</a></li>
-                        <li><a href="#">سياسة الخصوصية</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 style="margin-bottom: 15px;">اتصل بنا</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-phone"></i> +90 537 237 32 77</li>
-                        <li><i class="fas fa-phone"></i> +966 59 861 1010 </li>
-                        <li><i class="fas fa-envelope"></i> alkneter@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> زورونا في سوريا بفرعنا الجديد </li>
-                    </ul>
+                <div class="footer-col">
+                    <h3>اتصل بنا</h3>
+                    <p> زورونا في سوريا بفرعنا الجديد</p>
+                    <p>هاتف:+966 59 861 1010</p>
+                    <p>بريد: info@arkopro.com</p>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2025 Alkneter. جميع الحقوق محفوظة.</p>
+            <div class="copyright">
+                <p>&copy; 2023 Arko Pro. جميع الحقوق محفوظة.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i>✓</i>
+        <span>تم إرسال رسالتك بنجاح!</span>
+    </div>
+
+    <!-- Company Modal -->
+    <div class="modal" id="companyModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-header">
+                <h3 id="modalTitle">اسم الشركة</h3>
+                <p id="modalLocation">المدينة</p>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tab Switching
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Hide all tab panels
-                    document.querySelectorAll('.tab-panel').forEach(panel => {
-                        panel.classList.remove('active');
-                    });
-                    
-                    // Show the selected panel
-                    const tabId = this.getAttribute('data-tab');
-                    document.getElementById(tabId + '-tab').classList.add('active');
-                });
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navbar = document.querySelector('#navbar');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            mobileMenuBtn.textContent = navbar.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Close mobile menu when clicking on a nav link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+        
+        // Scroll Spy for Navigation
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
             });
             
-            // Mobile Menu Toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navLinks = document.querySelector('.nav-links');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
             });
             
-            // Form Submission
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('تم إرسال طلب البحث بنجاح! سيتم عرض النتائج الآن.');
-                    // In a real app, you would process the form and show results
-                });
-            });
+            // Header background change on scroll
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
             
-            // Update date inputs to show Arabic placeholder
-            const dateInputs = document.querySelectorAll('input[type="date"]');
-            dateInputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.type = 'date';
-                });
-                input.addEventListener('blur', function() {
-                    if (!this.value) {
-                        this.type = 'text';
-                        this.placeholder = 'اختر التاريخ';
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Back to top button functionality
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Company Filtering
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const companyCards = document.querySelectorAll('.company-card');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-tab');
+                
+                companyCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        card.classList.add('animate-flip');
+                    } else {
+                        card.style.display = 'none';
                     }
                 });
             });
         });
+        
+        // Service Filtering
+        const serviceBtns = document.querySelectorAll('.service-btn');
+        
+        serviceBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const service = btn.getAttribute('data-service');
+                
+                // Find the corresponding tab button and click it
+                tabBtns.forEach(tabBtn => {
+                    if (tabBtn.getAttribute('data-tab') === service) {
+                        tabBtn.click();
+                        
+                        // Scroll to companies section
+                        document.getElementById('companies').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+            
+            // Save to localStorage
+            const contact = {
+                name,
+                email,
+                phone,
+                message,
+                date: new Date().toISOString()
+            };
+            
+            let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+            contacts.push(contact);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            
+            // Show success message
+            showToast('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+        
+        // Toast Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.querySelector('span').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Lazy Load Images
+        const lazyImages = document.querySelectorAll('.lazy-img');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px 100px 0px'
+            });
+            
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src || img.src;
+                img.classList.add('loaded');
+            });
+        }
+        
+        // Company Modal
+        const companyBtns = document.querySelectorAll('.company-btn');
+        const companyModal = document.getElementById('companyModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalLocation = document.getElementById('modalLocation');
+        const modalBody = document.getElementById('modalBody');
+        
+        // Sample company data (in a real app, this would come from an API)
+        const companiesData = {
+            1: {
+                name: "فندق الشام",
+                location: "دمشق",
+                description: "فندق 5 نجوم يقع في قلب العاصمة دمشق، يوفر غرف فاخرة ومطاعم عالمية وخدمات مميزة.",
+                address: "شارع النصر، دمشق",
+                phone: "011-1234567",
+                website: "www.shamhotel.sy",
+                services: ["غرف فاخرة", "مطاعم متعددة", "سبا ومركز لياقة", "قاعات مؤتمرات"]
+            },
+            2: {
+                name: "فندق أفاميا",
+                location: "حمص",
+                description: "فندق 4 نجوم في مدينة حمص، يتميز بإطلالة رائعة على نهر العاصي وخدمات ممتازة.",
+                address: "شارع القوتلي، حمص",
+                phone: "031-7654321",
+                website: "www.afamiahotel.com",
+                services: ["غرف مكيفة", "مطعم فاخر", "خدمة الغرف", "موقف سيارات"]
+            },
+            3: {
+                name: "فندق البارون",
+                location: "حلب",
+                description: "أحد أعرق الفنادق في حلب، يجمع بين الأصالة والحداثة في خدمة الضيوف.",
+                address: "ساحة سعد الله الجابري، حلب",
+                phone: "021-9876543",
+                website: "www.baronhotel-aleppo.com",
+                services: ["غرف عائلية", "مطعم تقليدي", "خدمة نقل", "إنترنت مجاني"]
+            },
+            4: {
+                name: "شركة المفتاح الذهبي",
+                location: "دمشق",
+                description: "متخصصة في تأجير السيارات الفاخرة والعائلية مع سائقين محترفين.",
+                address: "المزة، شارع بغداد، دمشق",
+                phone: "011-2345678",
+                website: "www.goldenkey-sy.com",
+                services: ["سيارات حديثة", "سائقين محترفين", "تأجير يومي أو شهري", "تغطية تأمينية"]
+            },
+            5: {
+                name: "شركة طريق الشام",
+                location: "دمشق",
+                description: "تقدم مجموعة متنوعة من المركبات للتأجير اليومي أو الأسبوعي أو الشهري.",
+                address: "برزة، شارع الرئيس، دمشق",
+                phone: "011-8765432",
+                website: "www.shamway.com",
+                services: ["سيارات اقتصادية", "دفع نقدي أو ائتمان", "صيانة دورية", "دعم فني 24/7"]
+            },
+            6: {
+                name: "شركة الأسد للتأجير",
+                location: "حلب",
+                description: "واحدة من أكبر شركات تأجير السيارات في شمال سوريا، تخدم جميع المحافظات.",
+                address: "شارع الجمهورية، حلب",
+                phone: "021-3456789",
+                website: "www.alsadrent.com",
+                services: ["أسطول متنوع", "تأجير طويل الأجل", "خدمة الطوارئ", "أسعار تنافسية"]
+            },
+            7: {
+                name: "شركة دار الإيمان",
+                location: "دمشق",
+                description: "منظمة معتمدة لرحلات الحج والعمرة، تقدم برامج متكاملة وخدمات مميزة.",
+                address: "ركن الدين، شارع السيدة زينب، دمشق",
+                phone: "011-4567890",
+                website: "www.dareleman.com",
+                services: ["برامج حج كاملة", "إرشاد ديني", "إقامة فندقية", "نقل مريح"]
+            },
+            8: {
+                name: "شركة الروابي",
+                location: "دمشق",
+                description: "متخصصة في تنظيم رحلات الحج والعمرة بأسعار تنافسية ومرشدين متخصصين.",
+                address: "الميدان، شارع حسن الخراط، دمشق",
+                phone: "011-5678901",
+                website: "www.alrawabitours.com",
+                services: ["حج وعمرة", "تأمين صحي", "وجبات متنوعة", "خدمة 24 ساعة"]
+            },
+            9: {
+                name: "شركة النور",
+                location: "حمص",
+                description: "تقدم برامج حج وعمرة متميزة مع رعاية طبية وإشراف ديني متخصص.",
+                address: "شارع القصاصين، حمص",
+                phone: "031-6789012",
+                website: "www.alnourhaj.com",
+                services: ["فرق طبية مرافقة", "إرشاد ديني", "نقل مكيف", "إقامة قريبة من الحرم"]
+            },
+            10: {
+                name: "شركة شام تور",
+                location: "دمشق",
+                description: "تنظم جولات سياحية في جميع أنحاء سوريا مع مرشدين سياحيين متخصصين.",
+                address: "أبو رمانة، شارع 29 أيار، دمشق",
+                phone: "011-7890123",
+                website: "www.shamtours.com",
+                services: ["جولات يومية", "مرشدين سياحيين", "نقل مريح", "تذاكر دخول للمواقع"]
+            },
+            11: {
+                name: "شركة الدليل السياحي",
+                location: "حلب",
+                description: "تقدم رحلات سياحية مخصصة حسب رغبة الزبون إلى أهم المواقع الأثرية.",
+                address: "العزيزية، شارع تشرين، حلب",
+                phone: "021-8901234",
+                website: "www.aldaliltours.com",
+                services: ["رحلات مخصصة", "دليل سياحي متخصص", "نقل فاخر", "تغطية تأمينية"]
+            },
+            12: {
+                name: "شركة سوريانا تورز",
+                location: "اللاذقية",
+                description: "متخصصة في الجولات الساحلية والرحلات البحرية على الساحل السوري.",
+                address: "شارع 8 آذار، اللاذقية",
+                phone: "041-9012345",
+                website: "www.syrianatours.com",
+                services: ["رحلات بحرية", "جولات ساحلية", "رياضات مائية", "إقامة فندقية"]
+            },
+            13: {
+                name: "شركة الوطنية للتأمين",
+                location: "دمشق",
+                description: "أكبر شركة تأمين في سوريا، تقدم بوليصة تأمين سفر شاملة.",
+                address: "الصالحية، شارع بغداد، دمشق",
+                phone: "011-3456789",
+                website: "www.alwatania-ins.com",
+                services: ["تأمين سفر", "تغطية طبية", "تأمين أمتعة", "خدمة طوارئ"]
+            },
+            14: {
+                name: "السورية للتأمين",
+                location: "دمشق",
+                description: "تقدم حلول تأمين متنوعة تشمل تأمين السفر بمزايا إضافية.",
+                address: "المزة، شارع الجامعة، دمشق",
+                phone: "011-4567890",
+                website: "www.syrianins.com",
+                services: ["تأمين شامل", "تغطية الحوادث", "إخلاء طبي", "مساعدة قانونية"]
+            },
+            15: {
+                name: "الأهلية للتأمين",
+                location: "حلب",
+                description: "شركة تأمين رائدة تقدم بوليصة تأمين سفر مع تغطية طبية واسعة.",
+                address: "السليمانية، شارع الملك فيصل، حلب",
+                phone: "021-5678901",
+                website: "www.ahlia-insurance.com",
+                services: ["تأمين طبي", "تغطية إلغاء الرحلة", "تأمين المسؤولية", "مساعدة على السفر"]
+            },
+            16: {
+                name: "مركز الشام الطبي",
+                location: "دمشق",
+                description: "مركز طبي متكامل يقدم خدمات علاجية عالية الجودة مع إقامة فندقية.",
+                address: "مزة، شارع النصر، دمشق",
+                phone: "011-6789012",
+                website: "www.shammedical.com",
+                services: ["جراحة تجميلية", "علاج أسنان", "فحوصات شاملة", "إقامة فندقية"]
+            },
+            17: {
+                name: "مستشفى الأمل التخصصي",
+                location: "حلب",
+                description: "مستشفى متخصص يقدم حزم علاجية متكاملة مع خدمات نقل وإقامة.",
+                address: "شارع الجمهورية، حلب",
+                phone: "021-7890123",
+                website: "www.alamalhospital.com",
+                services: ["جراحة عامة", "علاج العيون", "أمراض القلب", "إعادة تأهيل"]
+            },
+            18: {
+                name: "مركز الحياة الطبي",
+                location: "حمص",
+                description: "مركز طبي حديث يقدم خدمات علاجية متخصصة مع برامج سياحية.",
+                address: "شارع القوتلي، حمص",
+                phone: "031-8901234",
+                website: "www.lifemedical.com",
+                services: ["علاج طبيعي", "جراحة العظام", "أمراض الباطنة", "برامج سياحية مصاحبة"]
+            }
+        };
+        
+        companyBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const companyId = btn.getAttribute('data-company');
+                const company = companiesData[companyId];
+                
+                if (company) {
+                    modalTitle.textContent = company.name;
+                    modalLocation.textContent = company.location;
+                    
+                    let modalContent = `
+                        <div class="company-modal-info">
+                            <p><strong>الوصف:</strong> ${company.description}</p>
+                            <div class="company-modal-details">
+                                <p><i>📍</i> <strong>العنوان:</strong> ${company.address}</p>
+                                <p><i>📞</i> <strong>الهاتف:</strong> ${company.phone}</p>
+                                <p><i>🌐</i> <strong>الموقع:</strong> ${company.website}</p>
+                            </div>
+                            <div class="company-modal-services">
+                                <h4>الخدمات المقدمة:</h4>
+                                <ul>
+                                    ${company.services.map(service => `<li>${service}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <a href="https://wa.me/9053421738887" class="whatsapp-btn" target="_blank" style="margin-top: 20px; display: inline-block;">
+                                <span>راسلنا على واتساب</span>
+                            </a>
+                        </div>
+                    `;
+                    
+                    modalBody.innerHTML = modalContent;
+                    companyModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        modalClose.addEventListener('click', () => {
+            companyModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        companyModal.addEventListener('click', (e) => {
+            if (e.target === companyModal) {
+                companyModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.service-card, .company-card, .info-item, .form-group');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Initialize animations
+        document.querySelectorAll('.service-card, .company-card, .info-item, .form-group').forEach(el => {
+            el.style.animationPlayState = 'paused';
+        });
     </script>
-<link rel="stylesheet" href="style.css" />
 </body>
 </html>
